@@ -1,1 +1,1 @@
-web: gunicorn #!/usr/bin/env python --log-file=-
+web: gunicorn flask-sqlalchemy-test-02.wsgi:application --log-file=-
