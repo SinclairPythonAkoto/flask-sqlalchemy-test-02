@@ -33,8 +33,8 @@ def view_db():
 		data = db.execute("SELECT * FROM example").fetachall()
 		return render_template('view_database.html', data=data)
 
-    except (Exception, psycopg2.Error) as error :
-	    return "Error while connecting to PostgreSQL", error
+    except:
+	    return "Error while connecting to PostgreSQL"
 
     finally:
     #closing database connection.
