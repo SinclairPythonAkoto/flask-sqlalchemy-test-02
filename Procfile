@@ -1,1 +1,1 @@
-web: gunicorn --log-file=-
+web: gunicorn #!/usr/bin/env python --log-file=-
