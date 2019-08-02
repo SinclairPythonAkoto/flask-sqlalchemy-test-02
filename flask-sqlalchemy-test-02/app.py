@@ -15,12 +15,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15
 #DATABASE_URL = os.environ.get('DATABASE_URL', '')
 db = SQLAlchemy(app)
 
-def connect_db():
-    return psycopg2.connect(os.environ.get('DATABASE_URL'))
+# def connect_db():
+#     return psycopg2.connect(os.environ.get('DATABASE_URL'))
 
-@app.before_request
-def before_request():
-    g.db_conn = connect_db()
+# @app.before_request
+# def before_request():
+#     g.db_conn = connect_db()
 
 
 
