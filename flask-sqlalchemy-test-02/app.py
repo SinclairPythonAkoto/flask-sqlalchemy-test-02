@@ -42,7 +42,7 @@ def hello():
 
 @app.route('/view_database')
 def view_db(info):
-	data = Example.query.filter_by(info=info).first_or_404()
+	#data = Example.query.filter_by(info=info).first_or_404()
 
 	query = "SELECT * FROM example"
 	data = db.execute(query)
