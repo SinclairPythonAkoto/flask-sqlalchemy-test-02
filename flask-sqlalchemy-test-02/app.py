@@ -13,7 +13,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy()
-db.init_app(app)
+#db.init_app(app)
 
 # heroku = Heroku(app)
 # db = SQLAlchemy(app)
