@@ -15,15 +15,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15
 DATABASE_URL = os.environ.get('DATABASE_URL', '')
 #db = SQLAlchemy(app)
 
-def connect_db():
-    return psycopg2.connect(os.environ.get('DATABASE_URL'))
-
-@app.before_request
-def before_request():
-    g.db_conn = connect_db()
-
-
-
 
 @app.route('/')
 def index():
@@ -39,13 +30,10 @@ def hello():
 
 @app.route('/view_database')
 def view_db():
-	# conn = psycopg2.connect(DATABASE_URL)
-	# cur = conn.cursor()
-	# data = cur.execute("SELECT * FROM example").fetachall()
-	# cur.close()
-	# conn.close()
-	# return render_template('view_database.html', data=data)
+	conn = psycopg2.connect(DATABASE_URL)
+	cur = conn.cursor()
+	data = cur.execute("SELECT * FROM example").fetachall()
+	cur.close()
+	conn.close()
+	return render_template('view_database.html', data=data)
 
-	db = g.db_conn.cursor()
-    entry = db.execute("SELECT * FROM example;").fetchall()
-    return render_template('view_database.html')
