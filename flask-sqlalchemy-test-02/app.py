@@ -25,7 +25,9 @@ def hello():
 def view_db():
 	conn = psycopg2.connect(DATABASE_URL)
 	db = conn.cursor()
-	data = db.execute("SELECT * FROM example").fetachall()
+	query = "SELECT * FROM example WHERE name=%s"
+	db.execute(query, (name,))
+	data = db.fetachall()
 	db.close()
 	conn.close()
 	return render_template('view_database.html', data=data)
