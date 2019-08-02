@@ -10,9 +10,9 @@ app.config['SQLALCHEMY_ENGINE_OPTIONS'] = False
 #app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'XYZ')
 
 #this works 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b'
+DATABASE_URI = app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b'
 
-#DATABASE_URL = os.environ.get('DATABASE_URL', '')
+DATABASE_URL = os.environ.get('DATABASE_URL', '')
 #db = SQLAlchemy(app)
 
 
@@ -30,7 +30,7 @@ def hello():
 
 @app.route('/view_database')
 def view_db():
-	conn = psycopg2.connect(app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b')
+	conn = psycopg2.connect(DATABASE_URI)
 	cur = conn.cursor()
 	data = cur.execute("SELECT * FROM example").fetachall()
 	cur.close()
