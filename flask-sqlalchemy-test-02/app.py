@@ -1,6 +1,8 @@
 import os
 import psycopg2
+from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, g, url_for
+
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = False
