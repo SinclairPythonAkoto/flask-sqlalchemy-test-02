@@ -42,6 +42,6 @@ def hello():
 
 @app.route('/view_database')
 def view_db():
-	data = Example.query.filter_by(name='%s').all()
+	data = Example.items().all()
 	return render_template('view_database.html', data=data)
 
