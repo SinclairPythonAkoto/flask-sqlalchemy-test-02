@@ -41,7 +41,7 @@ def hello():
 	return render_template('hello.html')
 
 @app.route('/view_database')
-def view_db(info):
+def view_db():
 	#data = Example.query.filter_by(info=info).first_or_404()
 
 	# query = "SELECT * FROM example"
