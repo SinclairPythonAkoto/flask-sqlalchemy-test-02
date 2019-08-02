@@ -17,7 +17,7 @@ db = SQLAlchemy(app)
 # db = SQLAlchemy(app)
 
 class  Example(db.Model):
-	__tablename__ = "flights"
+	__tablename__ = "example"
 	id = db.Column(db.Integer, primary_key=True)
 	info = db.Column(db.String, )
 	name = db.Column(db.String, )
@@ -42,6 +42,6 @@ def hello():
 
 @app.route('/view_database')
 def view_db():
-	data = Example.items().all()
+	data = db.execute("SELECT * FROM example")
 	return render_template('view_database.html', data=data)
 
