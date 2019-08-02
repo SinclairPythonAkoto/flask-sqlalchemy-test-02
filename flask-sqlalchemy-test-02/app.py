@@ -44,6 +44,7 @@ def hello():
 def view_db(info):
 	data = Example.query.filter_by(info=info).first_or_404()
 
-	#data = db.execute("SELECT * FROM example")
+	query = "SELECT * FROM example"
+	data = db.execute(query)
 	return render_template('view_database.html', data=data)
 
