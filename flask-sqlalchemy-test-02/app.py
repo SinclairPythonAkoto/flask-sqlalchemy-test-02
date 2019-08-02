@@ -44,7 +44,14 @@ def hello():
 def view_db(info):
 	#data = Example.query.filter_by(info=info).first_or_404()
 
-	query = "SELECT * FROM example"
-	data = db.execute(query)
+	# query = "SELECT * FROM example"
+	# data = db.execute(query)
+	# return render_template('view_database.html', data=data)
+
+	conn = psycopg2.connect(DATABASE_URL)
+	cur = conn.cursor()
+	data = cur.execute("SELECT * FROM example")
+	cur.close()
+	conn.close()
 	return render_template('view_database.html', data=data)
 
