@@ -13,7 +13,7 @@ app.config['SQLALCHEMY_ENGINE_OPTIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b'
 
 #DATABASE_URL = os.environ.get('DATABASE_URL', '')
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
 
 # def connect_db():
 #     return psycopg2.connect(os.environ.get('DATABASE_URL'))
@@ -39,13 +39,13 @@ def hello():
 
 @app.route('/view_database')
 def view_db():
-	# conn = psycopg2.connect(DATABASE_URL)
-	# cur = conn.cursor()
-	# data = cur.execute("SELECT * FROM example").fetachall()
-	# cur.close()
-	# conn.close()
-	# return render_template('view_database.html', data=data)
+	conn = psycopg2.connect(DATABASE_URL)
+	cur = conn.cursor()
+	data = cur.execute("SELECT * FROM example").fetachall()
+	cur.close()
+	conn.close()
+	return render_template('view_database.html', data=data)
 
-	db = g.db_conn.cursor()
-    entry = db.execute("SELECT * FROM example;").fetchall()
-    return render_template('view_database.html')
+	# db = g.db_conn.cursor()
+ #    entry = db.execute("SELECT * FROM example;").fetchall()
+ #    return render_template('view_database.html')
