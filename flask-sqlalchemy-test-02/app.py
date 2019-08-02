@@ -6,7 +6,7 @@ from flask import Flask, render_template, g, url_for
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = False
-app.config['SQLALCHEMY_NATIVE_UNICODE'] = False
+#app.config['SQLALCHEMY_NATIVE_UNICODE'] = False
 #app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'XYZ')
 
 #this works 
