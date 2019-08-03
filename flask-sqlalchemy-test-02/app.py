@@ -1,34 +1,34 @@
 import os
 import psycopg2
 from flask import Flask, render_template, g, url_for
-from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
+# from sqlalchemy import create_engine
+# from sqlalchemy.orm import scoped_session, sessionmaker
 
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+DATABASE_URL = os.environ.get(DATABASE_URL, '')
+
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#db = SQLAlchemy(app)
 #db.init_app(app)
 
-# heroku = Heroku(app)
-# db = SQLAlchemy(app)
 
-class  Example(db.Model):
-	__tablename__ = "example"
-	id = db.Column(db.Integer, primary_key=True)
-	info = db.Column(db.String, )
-	name = db.Column(db.String, )
-	city = db.Column(db.String, )
+# class  Example(db.Model):
+# 	__tablename__ = "example"
+# 	id = db.Column(db.Integer, primary_key=True)
+# 	info = db.Column(db.String, )
+# 	name = db.Column(db.String, )
+# 	city = db.Column(db.String, )
 
-	def __repr__(self):
-		return '<Example {}>'.format(self.info)
+# 	def __repr__(self):
+# 		return '<Example {}>'.format(self.info)
 
 
 
-DATABASE_URL = os.environ.get('postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b')
 
 
 @app.route('/')
@@ -45,16 +45,16 @@ def hello():
 
 @app.route('/view_database')
 def view_db():
-	conn=psycopg2.connect(
-	  database="d3uburco4fea1b",
-	  user="fikwczdiymxhwf",
-	  host="ec2-54-243-47-196.compute-1.amazonaws.com",
-	  password="73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13"
-	)
+	# conn=psycopg2.connect(
+	#   database="d3uburco4fea1b",
+	#   user="fikwczdiymxhwf",
+	#   host="ec2-54-243-47-196.compute-1.amazonaws.com",
+	#   password="73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13"
+	# )
 
-	#conn = psycopg2.connect('')
+	conn = psycopg2.connect(DATABASE_URL)
 	cur = conn.cursor()
-	data = cur.execute("SELECT * FROM example")
+	data = cur.execute("SELECT * FROM example").fetchall()
 	cur.close()
 	conn.close()
 	return render_template('view_database.html', data=data)
