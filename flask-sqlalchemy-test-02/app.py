@@ -45,13 +45,14 @@ def hello():
 
 @app.route('/view_database')
 def view_db():
-	#data = Example.query.filter_by(info=info).first_or_404()
+	conn=psycopg2.connect(
+	  database="d3uburco4fea1b",
+	  user="fikwczdiymxhwf",
+	  host="ec2-54-243-47-196.compute-1.amazonaws.com",
+	  password="73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13"
+	)
 
-	# query = "SELECT * FROM example"
-	# data = db.execute(query)
-	# return render_template('view_database.html', data=data)
-
-	conn = psycopg2.connect('')
+	#conn = psycopg2.connect('')
 	cur = conn.cursor()
 	data = cur.execute("SELECT * FROM example")
 	cur.close()
