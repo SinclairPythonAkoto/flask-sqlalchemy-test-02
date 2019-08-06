@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 from flask_sqlalchemy import SQLAlchemy
+db = psycopg2.connect("dbname=d3uburco4fea1b user=fikwczdiymxhwf password=73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13 host=ec2-54-243-47-196.compute-1.amazonaws.com port=5432")
 
 
 app = Flask(__name__)
@@ -16,7 +17,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # heroku = Heroku(app)
 # db = SQLAlchemy(app)
 
-db = psycopg2.connect("dbname=d3uburco4fea1b user=fikwczdiymxhwf password=73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13 host=ec2-54-243-47-196.compute-1.amazonaws.com port=5432")
 
 class  Example(db.Model):
 	__tablename__ = "example"
