@@ -53,8 +53,8 @@ def view_db():
 	# data = db.execute(query)
 	# return render_template('view_database.html', data=data)
 
-	#conn = psycopg2.connect(DATABASE_URL)
-	cur = db.cursor()
+	conn = psycopg2.connect(DATABASE_URL)
+	cur = conn.cursor()
 	data = cur.execute("SELECT * FROM example")
 	cur.close()
 	conn.close()
