@@ -52,7 +52,7 @@ def view_db():
 	# data = db.execute(query)
 	# return render_template('view_database.html', data=data)
 
-	conn = psycopg2.connect(DATABASE_URL, "dbname=d3uburco4fea1b user=fikwczdiymxhwf password=73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13 host=ec2-54-243-47-196.compute-1.amazonaws.com port=5432")
+	conn = psycopg2.connect("dbname=d3uburco4fea1b user=fikwczdiymxhwf password=73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13 host=ec2-54-243-47-196.compute-1.amazonaws.com port=5432")
 	cur = conn.cursor()
 	data = cur.execute("SELECT * FROM example")
 	cur.close()
