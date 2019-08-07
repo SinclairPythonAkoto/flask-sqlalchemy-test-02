@@ -10,10 +10,13 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-#db.init_app(app)
+
+db.init_app(app)
+db = SQLAlchemy()
+
 
 # heroku = Heroku(app)
 # db = SQLAlchemy(app)
@@ -30,7 +33,8 @@ class  Example(db.Model):
 
 
 
-DATABASE_URL = os.environ.get('postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b')
+#DATABASE_URL = os.environ.get('DATABASE_URL', '')
+#DATABASE_URL = 'postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b'
 
 
 @app.route('/')
@@ -53,10 +57,13 @@ def view_db():
 	# data = db.execute(query)
 	# return render_template('view_database.html', data=data)
 
-	conn = psycopg2.connect('')
-	cur = conn.cursor()
-	data = cur.execute("SELECT * FROM example")
-	cur.close()
-	conn.close()
+	# conn = psycopg2.connect(DATABASE_URL)
+	# cur = conn.cursor()
+	data = db.execute("SELECT * FROM example")
+	#data = db.execute("SELECT * FROM example").fetchall()
+	#print(data)
+
+	# db.close()
+	# conn.close()
 	return render_template('view_database.html', data=data)
 
