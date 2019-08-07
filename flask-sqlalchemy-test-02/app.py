@@ -4,6 +4,8 @@ from flask import Flask, render_template, g, url_for
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
+import urlparse
+
 from flask_sqlalchemy import SQLAlchemy
 
 
