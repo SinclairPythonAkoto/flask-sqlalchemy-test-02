@@ -14,8 +14,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db.init_app(app)
-db = SQLAlchemy()
+db = SQLAlchemy() # creating database object
+db.init_app(app) # pass app to the database
 
 
 # heroku = Heroku(app)
