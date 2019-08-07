@@ -3,12 +3,12 @@
 {% block body %}
 
 
-
+{% for info in data %}
 <ul>
 	<li>{{ data[1] }}</li>
 	<li>{{ data[2] }}</li>
 </ul>
-
+{% endfor %}
 <br>
 <br>
 <a href="{{ url_for('index') }}">Home</a>
