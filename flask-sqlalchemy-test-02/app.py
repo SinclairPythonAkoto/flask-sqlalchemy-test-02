@@ -1,27 +1,20 @@
 import os
-import psycopg2 
+import psycopg2
 from flask import Flask, render_template, g, url_for
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-
-import urlparse
 
 from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.secret_key = "shalieka-akoto-2017"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+#db.init_app(app)
 
+# heroku = Heroku(app)
 # db = SQLAlchemy(app)
-
-# urlparse.uses_netloc.append("postgres")
-# url = urlparse.urlparse(os.environ["DATABASE_URL"])
-# DATABASE_URL = os.environ.get('DATABASE_URL')
-# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-
 
 class  Example(db.Model):
 	__tablename__ = "example"
@@ -35,7 +28,7 @@ class  Example(db.Model):
 
 
 
-
+DATABASE_URL = os.environ.get('postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b')
 
 
 @app.route('/')
@@ -58,7 +51,7 @@ def view_db():
 	# data = db.execute(query)
 	# return render_template('view_database.html', data=data)
 
-	conn = psycopg2.connect("")
+	conn = psycopg2.connect('')
 	cur = conn.cursor()
 	data = cur.execute("SELECT * FROM example")
 	cur.close()
