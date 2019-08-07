@@ -10,22 +10,12 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL") # this connects to heroku database
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# db = SQLAlchemy() # creating database object
-# db.init_app(app) # pass app to the database
-
-# Session = sessionmaker(bind = db)
-# session = Session()
-
-
-# heroku = Heroku(app)
-# db = SQLAlchemy(app)
 from sqlalchemy.orm import sessionmaker
 
-
+# tis part is needed to create session to query database.  this should be JUST BELOW app.config..
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import create_engine
 engine = create_engine(os.getenv("DATABASE_URL"), echo = True)
@@ -36,7 +26,7 @@ Base = declarative_base()
 
 
 
-
+# database class
 class  Example(Base):
 	__tablename__ = "example"
 	id = Column(Integer, primary_key=True)
@@ -44,15 +34,10 @@ class  Example(Base):
 	name = Column(String, )
 	city = Column(String, )
 
-	# def __repr__(self):
-	# 	return '<Example {}>'.format(self.info)
 
 
 
-#DATABASE_URL = os.environ.get('DATABASE_URL', '')
-#DATABASE_URL = 'postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b'
-
-
+# homepage
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -65,19 +50,15 @@ def page_2():
 def hello():
 	return render_template('hello.html')
 
+# view database page
 @app.route('/view_database')
 def view_db():
 	
 	Session = sessionmaker(bind = engine)
 	session = Session()
-	data = session.query(Example).all()
+	# the two steps above needed to query database
+	data = session.query(Example).all() # name of database class passed in query(...)
 
 
-	#data = db.select([example])
-	#data = db.execute("SELECT * FROM example").fetchall()
-	#print(data)
-
-	# db.close()
-	# conn.close()
 	return render_template('view_database.html', data=data)
 
