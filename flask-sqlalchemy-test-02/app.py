@@ -37,15 +37,15 @@ Base = declarative_base()
 
 
 
-class  Example(db.Model):
+class  Example(Base):
 	__tablename__ = "example"
-	id = db.Column(db.Integer, primary_key=True)
-	info = db.Column(db.String, )
-	name = db.Column(db.String, )
-	city = db.Column(db.String, )
+	id = Column(Integer, primary_key=True)
+	info = Column(String, )
+	name = Column(String, )
+	city = Column(String, )
 
-	def __repr__(self):
-		return '<Example {}>'.format(self.info)
+	# def __repr__(self):
+	# 	return '<Example {}>'.format(self.info)
 
 
 
@@ -70,7 +70,7 @@ def view_db():
 	
 	Session = sessionmaker(bind = engine)
 	session = Session()
-	data = session.query('example').all()
+	data = session.query(Example).all()
 
 
 	#data = db.select([example])
