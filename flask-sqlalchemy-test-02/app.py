@@ -51,15 +51,10 @@ def hello():
 
 @app.route('/view_database')
 def view_db():
-	#data = Example.query.filter_by(info=info).first_or_404()
+	
+	data = db.query(Example).all()
 
-	# query = "SELECT * FROM example"
-	# data = db.execute(query)
-	# return render_template('view_database.html', data=data)
-
-	# conn = psycopg2.connect(DATABASE_URL)
-	# cur = conn.cursor()
-	data = db.execute("SELECT * FROM example")
+	#data = db.select([example])
 	#data = db.execute("SELECT * FROM example").fetchall()
 	#print(data)
 
