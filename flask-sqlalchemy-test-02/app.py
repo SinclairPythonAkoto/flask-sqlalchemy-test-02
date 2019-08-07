@@ -10,17 +10,17 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.secret_key = "shalieka-akoto-2017"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.secret_key = "shalieka-akoto-2017"
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #db = SQLAlchemy(app)
 #db.init_app(app)
 
 # heroku = Heroku(app)
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 
-urlparse.uses_netloc.append("postgres")
-url = urlparse.urlparse(os.environ["DATABASE_URL"])
+# urlparse.uses_netloc.append("postgres")
+# url = urlparse.urlparse(os.environ["DATABASE_URL"])
 
 
 
@@ -36,7 +36,8 @@ class  Example(db.Model):
 
 
 
-# DATABASE_URL = os.environ.get('postgres://fikwczdiymxhwf:73bf42c2c8a15fa59b77e93654b6383e1cf4f85bdf0156818d1cf39a77815f13@ec2-54-243-47-196.compute-1.amazonaws.com:5432/d3uburco4fea1b')
+DATABASE_URL = os.environ.get('DATABASE_URL')
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 
 @app.route('/')
@@ -59,13 +60,13 @@ def view_db():
 	# data = db.execute(query)
 	# return render_template('view_database.html', data=data)
 
-	conn = psycopg2.connect(
-		database=url.path[1:],
-		user=url.username,
-		password=url.password,
-		host=url.host,
-		port=url.port
-		)
+	# conn = psycopg2.connect(
+	# 	database=url.path[1:],
+	# 	user=url.username,
+	# 	password=url.password,
+	# 	host=url.host,
+	# 	port=url.port
+	# 	)
 	cur = conn.cursor()
 	data = cur.execute("SELECT * FROM example").fetchall()
 	cur.close()
