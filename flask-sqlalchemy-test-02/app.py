@@ -19,7 +19,8 @@ db = SQLAlchemy(app)
 
 # urlparse.uses_netloc.append("postgres")
 # url = urlparse.urlparse(os.environ["DATABASE_URL"])
-
+# DATABASE_URL = os.environ.get('DATABASE_URL')
+# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 
 class  Example(db.Model):
@@ -34,8 +35,7 @@ class  Example(db.Model):
 
 
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
 
 
 @app.route('/')
@@ -58,13 +58,7 @@ def view_db():
 	# data = db.execute(query)
 	# return render_template('view_database.html', data=data)
 
-	conn = psycopg2.connect(
-		database=url.path[1:],
-		user=url.username,
-		password=url.password,
-		host=url.host,
-		port=url.port
-		)
+	conn = psycopg2.connect("")
 	cur = conn.cursor()
 	data = cur.execute("SELECT * FROM example")
 	cur.close()
