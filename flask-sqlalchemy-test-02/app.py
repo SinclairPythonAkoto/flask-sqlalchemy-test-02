@@ -17,15 +17,15 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-class  Example(db.Model):
-	__tablename__ = "example"
-	id = db.Column(db.Integer, primary_key=True)
-	info = db.Column(db.String, )
-	name = db.Column(db.String, )
-	city = db.Column(db.String, )
+# class  Example(db.Model):
+# 	__tablename__ = "example"
+# 	id = db.Column(db.Integer, primary_key=True)
+# 	info = db.Column(db.String, )
+# 	name = db.Column(db.String, )
+# 	city = db.Column(db.String, )
 
-	def __repr__(self):
-		return '<Example {}>'.format(self.info)
+# 	def __repr__(self):
+# 		return '<Example {}>'.format(self.info)
 
 
 
