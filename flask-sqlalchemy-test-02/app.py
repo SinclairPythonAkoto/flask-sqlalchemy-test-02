@@ -58,15 +58,15 @@ def view_db():
 	# data = db.execute(query)
 	# return render_template('view_database.html', data=data)
 
-	# conn = psycopg2.connect(
-	# 	database=url.path[1:],
-	# 	user=url.username,
-	# 	password=url.password,
-	# 	host=url.host,
-	# 	port=url.port
-	# 	)
+	conn = psycopg2.connect(
+		database=url.path[1:],
+		user=url.username,
+		password=url.password,
+		host=url.host,
+		port=url.port
+		)
 	cur = conn.cursor()
-	data = cur.execute("SELECT * FROM example").fetchall()
+	data = cur.execute("SELECT * FROM example")
 	cur.close()
 	conn.close()
 	return render_template('view_database.html', data=data)
