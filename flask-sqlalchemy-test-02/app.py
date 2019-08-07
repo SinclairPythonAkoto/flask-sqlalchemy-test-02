@@ -14,15 +14,28 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy() # creating database object
-db.init_app(app) # pass app to the database
+# db = SQLAlchemy() # creating database object
+# db.init_app(app) # pass app to the database
 
-Session = sessionmaker(bind = db)
-session = Session()
+# Session = sessionmaker(bind = db)
+# session = Session()
 
 
 # heroku = Heroku(app)
 # db = SQLAlchemy(app)
+from sqlalchemy.orm import sessionmaker
+
+
+from sqlalchemy import Column, Integer, String
+from sqlalchemy import create_engine
+engine = create_engine(os.getenv("DATABASE_URL"), echo = True)
+from sqlalchemy.ext.declarative import declarative_base
+Base = declarative_base()
+
+
+
+
+
 
 class  Example(db.Model):
 	__tablename__ = "example"
@@ -55,9 +68,10 @@ def hello():
 @app.route('/view_database')
 def view_db():
 	
+	Session = sessionmaker(bind = engine)
+	session = Session()
+	data = session.query('example').all()
 
-
-	data = session.query(Example).all()
 
 	#data = db.select([example])
 	#data = db.execute("SELECT * FROM example").fetchall()
