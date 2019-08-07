@@ -17,6 +17,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy() # creating database object
 db.init_app(app) # pass app to the database
 
+Session = sessionmaker(bind = db)
+session = Session()
+
 
 # heroku = Heroku(app)
 # db = SQLAlchemy(app)
@@ -52,7 +55,9 @@ def hello():
 @app.route('/view_database')
 def view_db():
 	
-	data = db.query(Example).all()
+
+
+	data = session.query(Example).all()
 
 	#data = db.select([example])
 	#data = db.execute("SELECT * FROM example").fetchall()
