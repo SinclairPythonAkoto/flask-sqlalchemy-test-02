@@ -8,3 +8,4 @@ INSERT INTO example (id, info, name, city) VALUES (7, 'Security', 'Dwaine', 'Bir
 INSERT INTO example (id, info, name, city) VALUES (8, 'house keeper', 'Beatrice', 'Kumasi');
 INSERT INTO example (id, info, name, city) VALUES (9, 'web developer', 'SinclairPythonAkoto', 'somewhere random!');
 INSERT INTO example (id, info, name, city) VALUES (10, 'programmer', 'Junior', 'New York');
+INSERT INTO example (id, info, name, city) VALUES (11, 'Security', 'Alvin', 'London')
